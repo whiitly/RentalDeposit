@@ -1,5 +1,5 @@
-const RentalDeposit = artifacts.require("RentalDeposit");
+const HomeyContract = artifacts.require("HomeyContract");
 
 module.exports = function (deployer) {
-  deployer.deploy(RentalDeposit);
+  deployer.deploy(HomeyContract);
 };

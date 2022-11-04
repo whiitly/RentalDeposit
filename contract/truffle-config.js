@@ -1,5 +1,6 @@
-require("dotenv").config()
+// require("dotenv").config()
 const HDWalletProvider = require("@truffle/hdwallet-provider");
+const mnemonic = "flag course cliff normal health fold wrestle monster pluck purchase diesel lamp";
 
 /**
  * Use this file to configure your truffle project. It's seeded with some
@@ -67,11 +68,12 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    ganache: {
+     host: "127.0.0.1",     // Localhost (default: none)
+     port: 7545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+     provider: () => new HDWalletProvider(mnemonic, "HTTP://127.0.0.1:7545"),
+    },
     //
     // An additional network, but with some advanced options…
     // advanced: {
@@ -85,20 +87,37 @@ module.exports = {
     //
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
-    goerli: {
-      provider: () => new HDWalletProvider({
-        privateKeys: [process.env.ACCOUNT_PRIVATE_KEY],
-        providerOrUrl: process.env.INFURA_API_URL,
-        numberOfAddresses: 1
-      }),
-      network_id: 5,       // Goerli's id
-      // gas: 4465030,
-      gasPrice: 50000000000,
-      websocket: true,
-      skipDryRun: true // Skip dry run before migrations? (default: false for public nets )
-      // confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
-      // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-    },
+
+    
+      // ganache: { 
+      //   provider: () => new HDWalletProvider({
+      //       privateKeys: [process.env.ACCOUNT_PRIVATE_KEY],
+      //       providerOrUrl: process.env.INFURA_API_URL,
+      //       numberOfAddresses: 1
+      //     }),
+      //   host: "127.0.0.1",
+      //   port: 7545,
+      //   network_id: 5777,
+      //   websocket: true,
+      // }
+    
+
+
+
+    // goerli: {
+    //   provider: () => new HDWalletProvider({
+    //     privateKeys: [process.env.ACCOUNT_PRIVATE_KEY],
+    //     providerOrUrl: process.env.INFURA_API_URL,
+    //     numberOfAddresses: 1
+    //   }),
+    //   network_id: 5,       // Goerli's id
+    //   gasPrice: 50000000000,
+    //   websocket: true,
+    //   skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+    // // gas: 4465030,
+    // confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
+    // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+    // },
     //
     // Useful for private networks
     // private: {
