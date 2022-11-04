@@ -5,35 +5,35 @@
 		"type": "constructor"
 	},
 	{
-		"inputs": [],
-		"name": "InvalidState",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "OnlyLandlord",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "OnlyTenant",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "_claimValue",
-		"outputs": [
+		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_value",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "_tenant",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_propertyId",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"name": "createContract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_propertyId",
+				"type": "uint256"
+			},
 			{
 				"internalType": "uint256",
 				"name": "_damageValue",
@@ -46,52 +46,43 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "landlord",
-		"outputs": [
-			{
-				"internalType": "address payable",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "landlordAccept",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "releaseDepositToTenant",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "remainingDeposit",
-		"outputs": [
+		"inputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "state",
+		"name": "leaseContracts",
 		"outputs": [
 			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "landlord",
+				"type": "address"
+			},
+			{
+				"internalType": "address payable",
+				"name": "tenant",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "claimValue",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "propertyId",
+				"type": "uint256"
+			},
+			{
 				"internalType": "enum RentalDeposit.State",
-				"name": "",
+				"name": "state",
 				"type": "uint8"
 			}
 		],
@@ -99,43 +90,60 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "tenant",
-		"outputs": [
+		"inputs": [
 			{
-				"internalType": "address payable",
-				"name": "",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "_propertyId",
+				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "tenantOffer",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "tenantTerminate",
+		"name": "releaseDeposit",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "value",
-		"outputs": [
+		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_propertyId",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"name": "requestDeposit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_propertyId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_landlordAddress",
+				"type": "address"
+			}
+		],
+		"name": "tenantAccept",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_propertyId",
+				"type": "uint256"
+			}
+		],
+		"name": "tenantTerminate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.11;
 
-//0746753360
-contract RentalDeposit {
+contract HomeyContract {
     enum State {
         Created,
         Active,
@@ -68,9 +67,6 @@ contract RentalDeposit {
         );
         _;
     }
-
-    //landlord offered: $1000, tenantAddress, 0746356780
-    //tenant accept: $1000,
 
     function createContract(
         uint256 _value,

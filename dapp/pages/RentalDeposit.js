@@ -14,12 +14,12 @@ const RentalDeposit = () => {
   const [depositAmt, setDepositAmt] = useState('')
   const [claimAmt, setClaimAmt] = useState('')
   const [depositHold, setDepositHold] = useState('')
-  const [myDonutCount, setMyDonutCount] = useState('')
+  // const [myDonutCount, setMyDonutCount] = useState('')
 
   useEffect(() => {
     if (rdContract) getDepositHoldHandler()
     // if (rdContract && address) getMyDonutCountHandler()
-    if (rdContract && address) tenantOfferHandler()
+    // if (rdContract && address) tenantOfferHandler()
   }, [rdContract, address])
 
   const getDepositHoldHandler = async () => {
@@ -35,9 +35,10 @@ const RentalDeposit = () => {
     try {
       await rdContract.methods.tenantOffer(depositAmt).send({
         from: address,
-        value: web3.utils.toWei('1', 'ether') * depositAmt
+        // value: web3.utils.toWei('1', 'ether') * depositAmt
+        value: web3.utils.toWei('0.1' , 'ether') * depositAmt
       })
-      setSuccessMsg(Offered`${depositAmt} as a deposit!`)
+      setSuccessMsg(`Offer sent with ${depositAmt} ethers as deposit`)
 
       if (rdContract) getDepositHoldHandler()
       // if (rdContract && address) getMyDonutCountHandler()
@@ -47,9 +48,11 @@ const RentalDeposit = () => {
   }
 
   // const tenantTerminateHandler
-  
+
+  // const AcceptOfferHandler
+
   // const ReturnDepositHandler
-  
+
   const updateClaimAmount = event => {
     // console.log(`amount :: ${event.target.value}`)
     setClaimAmt(event.target.value)
@@ -67,7 +70,7 @@ const RentalDeposit = () => {
         const web3 = new Web3(window.ethereum)
         /* set web3 instance */
         setWeb3(web3)
-        /* get list of accounts */
+        /* Grab all the accounts from metamask */
         const accounts = await web3.eth.getAccounts()
         /* set Account 1 to React state var */
         setAddress(accounts[0])
@@ -110,7 +113,7 @@ const RentalDeposit = () => {
       </nav>
       <section>
         <div className="container">
-          <h2>Deposit Hold in contract: {depositHold}</h2>
+          <h2>Current deposit amount in contract:  <button className="button is-primary">{depositHold}</button> ether</h2>
         </div>
       </section>
       <section>
@@ -125,15 +128,17 @@ const RentalDeposit = () => {
             <div className="control">
               <input onChange={updateDepositAmount} className="input" type="type" placeholder="Enter deposit amount" />
             </div>
-            <button
+            <div mt-2>
+              <button
               onClick={tenantOfferHandler}
-              className="button is-primary mt-2"
-            >Make an offer to landlord</button>
-            <div>
+              className="button is-primary "
+            >Offer</button>Note: Make an offer to landlord by paying deposit
+            </div>
+            <div mt-2>
               <button
                 // onClick={tenantTerminateHandler}
-                className="button is-primary mt-2"
-              >Terminate offer - you will not get the deposit back</button>
+                className="button is-primary "
+              >Terminate offer</button>Note: you will not get the deposit back
             </div>
           </div>
         </div>
@@ -142,17 +147,27 @@ const RentalDeposit = () => {
         <div className="container">
           <div className="field">
             <label className="label">If you are a landlord</label>
-            <button
-              // onClick={ReturnDepositHandler}
-              className="button is-primary mt-2"
-            >Confirm no asset damage - release deposit to tenant</button>
+            <div mt-2>
+              <button
+                // onClick={AcceptOfferHandler}
+                className="button is-primary "
+              >Accept Offer</button>Note: you cannot terminate the contract once clicked accepted
+            </div>
+            <div mt-2>
+              <button
+                // onClick={ReturnDepositHandler}
+                className="button is-primary "
+              >Release deposit</button>Note: you have confirmed property condition is in order and no claims needed
+            </div>
             <div className="control">
               <input onChange={updateClaimAmount} className="input" type="type" placeholder="Enter claim amount" />
             </div>
-            <button
-              // onClick={damageClaimHandler}
-              className="button is-primary mt-2"
-            >Release remaining deposit to tenant</button>
+            <div mt-2>
+              <button
+                // onClick={damageClaimHandler}
+                className="button is-primary "
+              >Release remaining deposit</button>Note: You need to upload invoices of damage claim
+            </div>
           </div>
         </div>
       </section>
